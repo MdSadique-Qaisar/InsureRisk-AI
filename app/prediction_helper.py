@@ -4,8 +4,7 @@ import joblib
 import pandas as pd
 import numpy as np
 
-# SHAP is required for individual explanations from the XGBoost model.
-import shap
+import xgboost as xgb
 
 
 # ---------------------------------------------------------
@@ -268,22 +267,55 @@ def _linear_contributions(model, input_df):
 
 def _xgb_contributions(model, input_df):
     """
-    For XGBoost:
-        SHAP TreeExplainer calculates local feature contributions
-        for the exact applicant.
+    Calculate local XGBoost feature contributions using XGBoost's
+    native ``pred_contribs`` output.
+
+    The returned feature contributions are in the same units as the
+    model prediction. The final value returned by XGBoost is the
+    model bias/base contribution and is intentionally excluded from
+    the user-facing feature explanations.
+
+    This avoids SHAP's XGBoost model parser and therefore prevents
+    compatibility errors with serialized XGBoost models whose
+    ``base_score`` is stored in a newer vector representation such as
+    ``[5E-1]``.
     """
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(input_df)
+    if not hasattr(model, "get_booster"):
+        raise TypeError("The supplied model is not an XGBoost sklearn model.")
 
-    if isinstance(shap_values, list):
-        shap_values = shap_values[0]
+    feature_names = list(input_df.columns)
 
-    values = np.asarray(shap_values)
+    dmatrix = xgb.DMatrix(
+        input_df,
+        feature_names=feature_names,
+    )
 
-    if values.ndim == 2:
-        values = values[0]
+    contributions = model.get_booster().predict(
+        dmatrix,
+        pred_contribs=True,
+    )
 
-    return dict(zip(input_df.columns, values.astype(float)))
+    contributions = np.asarray(contributions, dtype=float)
+
+    if contributions.ndim == 2:
+        contributions = contributions[0]
+
+    expected_length = len(feature_names) + 1
+    if contributions.shape[0] != expected_length:
+        raise ValueError(
+            f"Unexpected XGBoost contribution shape: {contributions.shape}. "
+            f"Expected {expected_length} values for {len(feature_names)} features."
+        )
+
+    # XGBoost stores the bias/base contribution in the final position.
+    feature_contributions = contributions[:-1]
+
+    return dict(
+        zip(
+            feature_names,
+            feature_contributions.astype(float),
+        )
+    )
 
 
 def _group_contributions(raw_contributions):
