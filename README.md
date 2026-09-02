@@ -13,7 +13,7 @@ The application is built with **Python, Streamlit, scikit-learn, XGBoost, SHAP, 
 
 ---
 
-## 🎯 Project Objective
+##  Project Objective
 
 Insurance pricing depends on multiple applicant characteristics. The goal of InsureRisk AI is to provide a simple interface where a user can enter an applicant profile and receive:
 
@@ -32,7 +32,7 @@ The application is designed as a **machine-learning demonstration and decision-s
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 ### 1. Premium Prediction
 
@@ -141,7 +141,7 @@ The PDF is generated with ReportLab.
 
 ---
 
-# 🧠 Machine Learning Workflow
+#  Machine Learning Workflow
 
 ```text
 Applicant Input
@@ -184,7 +184,7 @@ Age-Based Model Selection
 
 ---
 
-# 📊 Input Features
+#  Input Features
 
 The application currently collects the following applicant information:
 
@@ -213,7 +213,7 @@ These inputs are assembled into the feature structure expected by the trained mo
 
 ---
 
-# 🔬 Feature Engineering & Preprocessing
+#  Feature Engineering & Preprocessing
 
 The prediction pipeline prepares a DataFrame using a predefined feature schema.
 
@@ -243,7 +243,7 @@ The application loads separate preprocessing/scaling artifacts for the two age-b
 
 ---
 
-# 🤖 Model Architecture
+#  Model Architecture
 
 ## Young Applicant Model
 
@@ -265,7 +265,7 @@ SHAP TreeExplainer is used to calculate local feature contributions for the indi
 
 ---
 
-# 🧩 Explainability Design
+#  Explainability Design
 
 The project does not simply display a prediction.
 
@@ -289,7 +289,7 @@ This is an **explanation of model behavior**, not causal inference.
 
 ---
 
-# 🏗️ Project Structure
+#  Project Structure
 
 Recommended GitHub structure:
 
@@ -329,7 +329,7 @@ The prediction helper expects an `artifacts` directory beside the Python file an
 
 ---
 
-# ⚙️ Installation
+#  Installation
 
 ## 1. Clone the repository
 
@@ -376,7 +376,7 @@ The Streamlit interface will open in your browser.
 
 ---
 
-# 📦 Dependencies
+#  Dependencies
 
 | Package | Purpose |
 |---|---|
@@ -456,249 +456,7 @@ Important limitations include:
 
 ---
 
-# 🚀 Recommended Improvements for a Stronger ML Portfolio
-
-If you want to present this as a serious **Data Scientist / ML Engineer portfolio project**, I recommend adding the following.
-
-## 1. Add a Model Evaluation Section
-
-Do not show only the prediction.
-
-Document:
-
-- MAE
-- RMSE
-- R²
-- Train vs validation/test performance
-- Cross-validation results
-
-Example:
-
-```text
-Model                 MAE       RMSE       R²
-------------------------------------------------
-Linear Regression     ...       ...        ...
-XGBoost Regressor     ...       ...        ...
-```
-
-This makes the project much more credible from an ML perspective.
-
-## 2. Add Baseline Model Comparison
-
-Compare the final models against a simple baseline such as:
-
-- Mean prediction
-- Median prediction
-- Linear Regression
-- Random Forest
-- XGBoost
-
-Then explain why the selected model was preferred.
-
-## 3. Add Model Validation
-
-Document:
-
-- Train/validation/test split
-- Cross-validation
-- Hyperparameter tuning
-- Random seed
-- Feature preprocessing
-
-This demonstrates that the model was not selected simply because it produced a visually appealing prediction.
-
-## 4. Add Global Feature Importance
-
-You already have **local explanations**.
-
-A stronger project should also show **global model behavior**:
-
-```text
-Global Feature Importance
-
-Insurance Plan      █████████████
-Medical History     █████████
-Age                 ███████
-Dependants          █████
-Smoking Status      ███
-...
-```
-
-This answers:
-
-> "What generally matters to the model?"
-
-while SHAP/local contributions answer:
-
-> "What mattered for this particular applicant?"
-
-## 5. Add SHAP Global Analysis
-
-For the XGBoost model, add:
-
-- SHAP summary plot
-- Mean absolute SHAP importance
-- Feature impact distribution
-
-This would significantly strengthen the explainability portion of the project.
-
-## 6. Add Data/Model Versioning
-
-For a more production-oriented repository, consider:
-
-```text
-data/
-models/
-notebooks/
-src/
-app/
-```
-
-and document:
-
-```text
-Dataset version
-Training date
-Model version
-Feature version
-```
-
-## 7. Add a Training Notebook
-
-A very good GitHub structure would separate:
-
-```text
-notebooks/
-    01_eda.ipynb
-    02_feature_engineering.ipynb
-    03_model_training.ipynb
-    04_model_evaluation.ipynb
-```
-
-This allows a recruiter to see the complete journey from:
-
-**Raw Data → EDA → Feature Engineering → Training → Evaluation → Deployment**
-
-rather than only seeing the Streamlit application.
-
-## 8. Add a Model Card
-
-Create a `MODEL_CARD.md` containing:
-
-- Model purpose
-- Training data
-- Features
-- Target variable
-- Evaluation metrics
-- Intended use
-- Out-of-scope use
-- Known limitations
-- Explainability approach
-- Fairness considerations
-
-This is a strong professional addition.
-
-## 9. Add Tests
-
-For example:
-
-```text
-tests/
-├── test_prediction.py
-├── test_risk_score.py
-└── test_preprocessing.py
-```
-
-Test:
-
-- Medical risk calculation
-- Feature preprocessing
-- Model selection
-- Prediction output
-- Risk classification
-
-## 10. Add CI/CD
-
-A GitHub Actions workflow can automatically:
-
-```text
-Push code
-   ↓
-Install dependencies
-   ↓
-Run tests
-   ↓
-Check application
-```
-
-This gives the repository a more ML-engineering-oriented feel.
-
----
-
-# 🔐 GitHub Security
-
-Do **not** commit:
-
-```text
-.env
-credentials
-API keys
-private datasets
-personal information
-```
-
-Use `.gitignore` and keep sensitive configuration outside the repository.
-
-If the trained `.joblib` files are large, consider Git LFS rather than committing large binaries directly to normal Git history.
-
----
-
-# 🧪 Suggested Future Roadmap
-
-### Phase 1 — Current Application
-
-- [x] Premium prediction
-- [x] Age-based model selection
-- [x] Medical-history feature engineering
-- [x] Risk indicator
-- [x] Individual explanations
-- [x] Insurance plan comparison
-- [x] PDF report
-- [x] Interactive Streamlit UI
-
-### Phase 2 — ML Evaluation
-
-- [ ] EDA notebook
-- [ ] Train/test evaluation
-- [ ] MAE / RMSE / R²
-- [ ] Cross-validation
-- [ ] Model comparison
-- [ ] Hyperparameter tuning
-- [ ] Global feature importance
-
-### Phase 3 — ML Engineering
-
-- [ ] Unit tests
-- [ ] Model versioning
-- [ ] Model card
-- [ ] CI/CD
-- [ ] Structured `src/` package
-- [ ] Logging
-- [ ] Input validation
-
-### Phase 4 — Production Readiness
-
-- [ ] REST API
-- [ ] Database integration
-- [ ] Authentication
-- [ ] Prediction logging
-- [ ] Monitoring
-- [ ] Data drift detection
-- [ ] Model performance monitoring
-
----
-
-# 👨‍💻 Skills Demonstrated
+#  Skills Demonstrated
 
 This project demonstrates practical experience with:
 
@@ -706,14 +464,10 @@ This project demonstrates practical experience with:
 
 ---
 
-# 📄 Disclaimer
+#  Disclaimer
 
 InsureRisk AI is an educational and portfolio-oriented machine-learning application.
 
 The estimated premium and model contributions are generated from trained machine-learning models. They should not be interpreted as guaranteed insurance prices, medical diagnoses, medical advice, or causal relationships.
 
----
 
-## ⭐ Project Summary
-
-> **InsureRisk AI is an explainable machine-learning platform for health insurance premium estimation. It combines feature engineering, age-based regression models, XGBoost, SHAP-based local explanations, medical-history risk scoring, insurance-plan scenario analysis, and an interactive Streamlit interface to provide transparent applicant-level premium estimates.**
