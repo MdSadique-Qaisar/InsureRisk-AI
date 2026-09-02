@@ -393,53 +393,6 @@ See `requirements.txt` for the installable dependency specification.
 
 ---
 
-# 📈 What Makes This an End-to-End ML Project?
-
-From a Data Scientist / ML Engineer perspective, the project covers more than simply training a model.
-
-### Data Science
-
-- Feature engineering
-- Categorical encoding
-- Numerical preprocessing
-- Model selection
-- Regression prediction
-- Model interpretation
-- Scenario analysis
-
-### Machine Learning
-
-- Multiple model architectures
-- Separate model paths
-- Persisted model artifacts
-- Persisted preprocessing artifacts
-- Prediction pipeline
-
-### Explainable AI
-
-- Local feature contributions
-- SHAP for XGBoost
-- Contribution grouping
-- Direction + magnitude interpretation
-
-### Application Engineering
-
-- Streamlit frontend
-- Session-state management
-- Interactive inputs
-- Prediction workflow
-- Error-safe premium floor
-- PDF report generation
-
-### Business Perspective
-
-- Premium estimation
-- Risk indicator
-- Plan comparison
-- Applicant-level explanation
-
----
-
 # ⚠️ Important Limitations
 
 This project should be presented as a **machine-learning prototype / portfolio project**, not as an actual insurance underwriting engine.
